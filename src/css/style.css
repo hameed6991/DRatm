@@ -1,6 +1,7 @@
 /* ==========================================================================
    DR. A. T. AHAMED MOHIDEEN - CORPORATE MEDICAL DESIGN SYSTEM
    Clinician | Researcher | Homoeopathic Paediatrician
+   Full Responsive Layout Architecture across Desktop, Tablet & Mobile (360px–1440px)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
@@ -41,11 +42,17 @@
   --transition-normal: 0.3s ease;
 }
 
-/* --- RESET & BASE STYLES --- */
+/* --- RESET & GLOBAL RESPONSIVE SAFETY STYLES --- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 html {
@@ -60,7 +67,6 @@ body {
   color: var(--color-charcoal);
   line-height: 1.65;
   font-weight: 400;
-  overflow-x: hidden;
 }
 
 a {
@@ -91,35 +97,38 @@ button, input, select, textarea {
   padding: 0 24px;
 }
 
-/* --- TYPOGRAPHY --- */
-h1, h2, h3, h4, h5, h6 {
+/* --- RESPONSIVE TYPOGRAPHY WITH FLUID CLAMPS --- */
+h1, h2, h3, h4, h5, h6,
+.pub-title, .timeline-role, .research-highlight-box h3, .clinic-title {
   color: var(--color-deep-navy);
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.015em;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 h1 {
-  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+  font-size: clamp(1.75rem, 5vw, 3.25rem);
   font-weight: 800;
   letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  font-size: clamp(1.375rem, 3.8vw, 2.5rem);
 }
 
 h3 {
-  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-size: clamp(1.125rem, 2.8vw, 1.5rem);
 }
 
 h4 {
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
 }
 
 p {
   color: var(--color-muted-text);
-  font-size: 1rem;
+  font-size: clamp(0.9375rem, 1.5vw, 1rem);
   line-height: 1.7;
 }
 
@@ -152,13 +161,14 @@ p {
   background-color: currentColor;
 }
 
-/* --- BUTTONS & CALLS TO ACTION --- */
+/* --- BUTTONS & TOUCH TARGET ACCESSIBILITY --- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 13px 26px;
+  padding: 12px 24px;
+  min-height: 44px;
   font-size: 0.9375rem;
   font-weight: 600;
   border-radius: var(--radius-md);
@@ -221,6 +231,7 @@ p {
 .btn-sm {
   padding: 8px 18px;
   font-size: 0.875rem;
+  min-height: 40px;
 }
 
 .btn-full {
@@ -251,6 +262,7 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  word-break: break-word;
 }
 
 .topbar-item a:hover {
@@ -282,6 +294,7 @@ p {
   display: flex;
   align-items: center;
   gap: 14px;
+  max-width: calc(100% - 48px);
 }
 
 .brand-badge {
@@ -297,11 +310,13 @@ p {
   font-size: 1.125rem;
   letter-spacing: -0.02em;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
 }
 
 .brand-text-container {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .brand-name {
@@ -310,6 +325,9 @@ p {
   color: var(--color-deep-navy);
   line-height: 1.2;
   letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .brand-title {
@@ -317,6 +335,9 @@ p {
   font-weight: 600;
   color: var(--color-muted-text);
   letter-spacing: 0.02em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .nav-menu {
@@ -356,6 +377,7 @@ p {
   cursor: pointer;
   padding: 8px;
   color: var(--color-deep-navy);
+  flex-shrink: 0;
 }
 
 .mobile-toggle svg {
@@ -376,7 +398,9 @@ p {
   box-shadow: var(--shadow-lg);
   z-index: 999;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+  max-height: calc(100vh - 84px);
+  overflow-y: auto;
 }
 
 .mobile-nav.open {
@@ -586,6 +610,14 @@ p {
   margin-top: 12px;
 }
 
+/* Intro Grid (About page & Home page introduction) */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 50px;
+  align-items: flex-start;
+}
+
 /* --- CURRENT RESEARCH BANNER / FEATURE --- */
 .research-highlight-box {
   background: linear-gradient(135deg, var(--color-medical-navy) 0%, var(--color-deep-navy) 100%);
@@ -625,7 +657,7 @@ p {
 
 .research-highlight-box h3 {
   color: var(--color-white);
-  font-size: 1.625rem;
+  font-size: clamp(1.25rem, 3vw, 1.625rem);
   margin-bottom: 12px;
   line-height: 1.35;
 }
@@ -685,6 +717,8 @@ p {
   margin-bottom: 20px;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--color-bg-light);
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .clinic-badge {
@@ -696,6 +730,7 @@ p {
   border-radius: 12px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  display: inline-block;
 }
 
 .clinic-title {
@@ -716,6 +751,8 @@ p {
   gap: 10px;
   font-size: 0.9375rem;
   color: var(--color-muted-text);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .clinic-detail-item svg {
@@ -776,6 +813,8 @@ p {
   border-radius: var(--radius-md);
   padding: 28px;
   box-shadow: var(--shadow-sm);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .timeline-date {
@@ -788,7 +827,7 @@ p {
 }
 
 .timeline-role {
-  font-size: 1.25rem;
+  font-size: clamp(1.0625rem, 2.5vw, 1.25rem);
   color: var(--color-deep-navy);
   margin-bottom: 4px;
 }
@@ -847,6 +886,7 @@ p {
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
+  flex-shrink: 0;
 }
 
 .achievement-icon svg {
@@ -888,7 +928,7 @@ p {
 }
 
 .pub-title {
-  font-size: 1.25rem;
+  font-size: clamp(1.0625rem, 2.5vw, 1.25rem);
   color: var(--color-deep-navy);
   margin-bottom: 12px;
 }
@@ -972,6 +1012,8 @@ p {
   font-size: 1.0625rem;
   font-weight: 500;
   margin-bottom: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .contact-info-text a:hover {
@@ -1026,6 +1068,7 @@ p {
 .form-control {
   width: 100%;
   padding: 12px 16px;
+  min-height: 46px;
   font-size: 0.9375rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -1138,6 +1181,11 @@ textarea.form-control {
   margin-top: 2px;
 }
 
+.footer-contact-item a {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
 .footer-contact-item a:hover {
   color: var(--color-white);
   text-decoration: underline;
@@ -1161,8 +1209,11 @@ textarea.form-control {
   padding-top: 16px;
 }
 
-/* --- RESPONSIVE BREAKPOINTS --- */
+/* ==========================================================================
+   STRICT RESPONSIVE BREAKPOINTS (1024px, 768px, 640px, 480px, 360px)
+   ========================================================================== */
 
+/* --- LAPTOP / TABLET (<=1024px) --- */
 @media (max-width: 1024px) {
   .hero-grid, .intro-grid, .contact-grid {
     grid-template-columns: 1fr;
@@ -1171,10 +1222,12 @@ textarea.form-control {
 
   .clinic-grid {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .achievements-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 
   .footer-grid {
@@ -1183,6 +1236,7 @@ textarea.form-control {
   }
 }
 
+/* --- MOBILE TABLET (<=768px) --- */
 @media (max-width: 768px) {
   .header-topbar {
     display: none;
@@ -1196,30 +1250,26 @@ textarea.form-control {
     display: block;
   }
 
+  .navbar {
+    height: 76px;
+  }
+
+  .mobile-nav {
+    top: 76px;
+    max-height: calc(100vh - 76px);
+  }
+
   .section {
     padding: 60px 0;
   }
 
-  .achievements-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
+  .section-header {
+    margin-bottom: 40px;
   }
 
   .research-highlight-box {
     padding: 32px 24px;
+    margin-bottom: 40px;
   }
 
   .hero-portrait-img {
@@ -1231,7 +1281,61 @@ textarea.form-control {
   }
 }
 
+/* --- MEDIUM MOBILE (<=640px) --- */
+@media (max-width: 640px) {
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .contact-info-card, .contact-form-container {
+    padding: 28px 20px;
+  }
+
+  .pub-card {
+    padding: 24px 20px;
+  }
+}
+
+/* --- SMALL MOBILE (<=480px) --- */
 @media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .section {
+    padding: 48px 0;
+  }
+
+  .hero {
+    padding: 48px 0 60px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
   .hero-portrait-img {
     height: 320px;
   }
@@ -1239,18 +1343,97 @@ textarea.form-control {
   .about-portrait-img {
     height: 280px;
   }
+
   .timeline {
     padding-left: 20px;
+  }
+
+  .timeline::before {
+    left: 5px;
   }
 
   .timeline-dot {
     left: -20px;
     width: 12px;
     height: 12px;
+    top: 6px;
+  }
+
+  .timeline-content {
+    padding: 18px 14px;
   }
 
   .hero-current-role-badge {
     flex-direction: column;
     gap: 8px;
+    padding: 14px;
+  }
+
+  .research-highlight-box {
+    padding: 24px 16px;
+  }
+
+  .research-highlight-meta {
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+    gap: 16px;
+  }
+
+  .clinic-card {
+    padding: 24px 16px;
+  }
+
+  .achievement-card {
+    padding: 20px 16px;
+  }
+
+  .brand-link {
+    gap: 10px;
+  }
+
+  .brand-badge {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+
+  .brand-name {
+    font-size: 0.9375rem;
+  }
+
+  .brand-title {
+    font-size: 0.6875rem;
+  }
+}
+
+/* --- NARROW MOBILE (<=360px) --- */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 14px;
+  }
+
+  .brand-title {
+    display: none;
+  }
+
+  .research-highlight-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-content {
+    padding: 14px 12px;
+  }
+
+  .timeline-dot {
+    left: -18px;
+  }
+
+  .hero-portrait-img {
+    height: 280px;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    font-size: 0.875rem;
   }
 }

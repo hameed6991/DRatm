@@ -50,6 +50,14 @@ function initMobileNav() {
     }
   });
 
+  // Close menu when clicking any nav link
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
   // Close menu when clicking outside
   document.addEventListener('click', (e) => {
     if (!mobileNav.contains(e.target) && !mobileToggle.contains(e.target) && mobileNav.classList.contains('open')) {
